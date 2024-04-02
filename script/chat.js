@@ -1,17 +1,30 @@
 const chat = document.querySelector("#chat");
 const message = document.querySelector("#message");
-const baseUrl = "http://localhost/chat";
+const baseUrl = "http://localhost/chat/script";
 const button = document.querySelector("#submit");
 const usernameInput = document.querySelector("#username"); // Select username input
+const user = document.querySelector("#user");
+let previousUsername;
 
 function readChat() {
   fetch(`${baseUrl}/chat-read.php`)
     .then((res) => res.text())
     .then((res) => {
-      chat.value = res;
-      // if (res.includes(":")) {
-      //   const splitter = res.split(";");
-      // }
+      const lines = res.split("|||"); // Split response into lines
+      const username = lines.pop(); // Get the last line (which is the username)
+
+      // Update #user element with the username
+      if (username) {
+        user.textContent = "User: " + username;
+        previousUsername = username; // Update previousUsername if username is not empty
+        console.log("ada");
+      } else {
+        user.textContent = "User: " + previousUsername; // Use previousUsername if username is empty
+        console.log("kosong");
+      }
+
+      // Remove the last line from chat text
+      chat.value = lines.join("\n");
     });
   setTimeout(readChat, 1000);
 }
