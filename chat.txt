@@ -12,20 +12,35 @@
 
 
 
-sjdklfajsldfjasdf
-ad
-sfas
-df
-asdf
-asdf
-tes tis tus
-cba
-cheat
-uhuy
-tes tis tus
-tes
-adfa
-hai
-turnof
-nyoba
-sad
+ksdf
+xixi
+apa kabar
+{"username":"","message":"asoy"}
+{"username":"","message":"sdfadsf"}
+{"username":"","message":"sdfad"}
+{"username":"","message":"as;dfmasdf"}
+{"username":"","message":"aji"}
+{"username":"","message":"la"}
+{"username":"","message":"halo"}
+{"username":"ks","message":"aldsf"}
+{"username":"jasdf","message":"lakdsf"}
+{"username":"askldjf","message":"askldfj"}
+{"username":"aloo","message":"cekkkkkk"}
+{"username":"","message":"sdf"}
+{"username":"","message":"jasdf"}
+{"username":"akjsdf","message":"alksdnf"}
+{"username":"","message":"akjsdf"}
+{"username":"","message":"alsdkf"}
+{"username":"","message":"alksdjf"}
+{"username":"","message":"kajsdfjjlkj"}
+{"username":"lakjsdf","message":"a,smdfn"}
+{"username":"","message":"aldmnsf"}
+{"username":"adsjfalksdfj","message":"asldfasdf"}
+{"username":"asldkjf","message":"lasndf"}
+{"username":"sadam","message":"ganteng"}
+{"username":"laksdjf","message":"laksdjf"}
+{"username":"","message":"skdfsdf"}
+{"username":"Sadam273","message":"halo"}
+{"username":"","message":"halo cok"}
+{"username":"sadam273","message":"hey"}
+{"username":"","message":"adsf"}

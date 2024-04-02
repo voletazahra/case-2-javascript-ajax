@@ -1,9 +1,11 @@
 <?php
 $message = $_POST['teks'] ?? '';
+$username = $_POST['username'] ?? '';
 
 if (!empty($message)) {
   $file = fopen("chat.txt", "a"); // Open the file in append mode
-  fwrite($file, $message . "\n"); // Write the message to the file
+  $data = json_encode(["username" => $username, "message" => $message]); // Encode data to JSON format
+  fwrite($file, $data . "\n"); // Write the data to the file
   fclose($file); // Close the file
   echo "Pesan tertulis di file chat.txt"; // Respond to the client
 } else {
