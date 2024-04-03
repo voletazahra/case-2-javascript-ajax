@@ -1,6 +1,6 @@
 const chat = document.querySelector("#chat");
 const message = document.querySelector("#message");
-const baseUrl = "http://localhost/chat/script";
+const baseUrl = "http://localhost/case-2-javascript-ajax/script";
 const button = document.querySelector("#submit");
 const usernameInput = document.querySelector("#username"); // Select username input
 const user = document.querySelector("#user");
@@ -17,10 +17,8 @@ function readChat() {
       if (username) {
         user.textContent = "User: " + username;
         previousUsername = username; // Update previousUsername if username is not empty
-        console.log("ada");
       } else {
         user.textContent = "User: " + previousUsername; // Use previousUsername if username is empty
-        console.log("kosong");
       }
 
       // Remove the last line from chat text
