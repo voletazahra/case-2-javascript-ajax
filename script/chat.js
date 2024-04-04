@@ -1,97 +1,64 @@
 // const chat = document.querySelector("#chat");
 const message = document.querySelector("#message");
-const baseUrl = "http://localhost/chat/script";
+const baseUrl = "http://localhost/chat/case-2-javascript-ajax/script";
 const button = document.querySelector("#submit");
 const usernameInput = document.querySelector("#username"); // Select username input
-const user = document.querySelector("#user");
+let user = document.querySelector("#user");
 const roomChat = document.querySelector("#roomChat"); // Select chat room element
 let previousUsername;
 
+readChat();
+
 function readChat() {
   fetch(`${baseUrl}/chat-read.php`)
-    .then((res) => res.text())
     .then((res) => {
-      const lines = res.split("|||"); // Split response into lines
-      const username = lines.pop(); // Get the last line (which is the username)
-
-      // Update #user element with the username
-      if (username) {
-        user.textContent = "User: " + username;
-        previousUsername = username; // Update previousUsername if username is not empty
-      } else {
-        user.textContent = "User: " + previousUsername; // Use previousUsername if username is empty
-      }
+      return res.text();
+    })
+    .then((res) => {
+      let lines = res.split("\n"); // Split response into lines
 
       // Clear previous chat content
       roomChat.innerHTML = '';
 
-      // Display each message in a bubble chat
       lines.forEach((line) => {
-        let bubbleChat = document.createElement("div");
-        bubbleChat.classList.add("row", "justify-content-end", "d-flex");
-        bubbleChat.classList.add("col", "justify-content-end");
-        bubbleChat.innerHTML = `
-          <div class="chatSelf p-2 px-3">
-              <div class="message-content">${message}</div>
-              <div class="text-start timeSent" style="font-size: 12px;">${getCurrentTime()}</div>
-          </div>
-        `;
-        roomChat.appendChild(bubbleChat);
+        if(line != ""){
+          part = line.split("|||");
+          let name = part[0];
+          let msg = part[1];
+  
+          if (name == user.textContent) {
+            displayMessage(msg, true);
+          } else {
+            displayMessage(msg, false);
+          }
+        }
       });
     })
     .catch((error) => {
       console.error("Fetch mode error", error);
     });
-
+    
   setTimeout(readChat, 1000);
 }
 
-
-function readChat() {
-  fetch(`${baseUrl}/chat-read.php`)
-    .then((res) => res.text())
-    .then((res) => {
-      const lines = res.split("|||"); // Split response into lines
-      const username = lines.pop(); // Get the last line (which is the username)
-
-      // Update #user element with the username
-      if (username) {
-        user.textContent = "User: " + username;
-        previousUsername = username; // Update previousUsername if username is not empty
-      } else {
-        user.textContent = "User: " + previousUsername; // Use previousUsername if username is empty
-      }
-
-      // Clear previous chat content
-      roomChat.innerHTML = '';
-
-      // Display each message in a bubble chat
-      lines.forEach((line) => {
-        displayMessage(line); // Add this line to display existing messages
-      });
-    })
-    .catch((error) => {
-      console.error("Fetch mode error", error);
-    });
-
-  setTimeout(readChat, 1000);
-}
 
 function displayMessage(line, isSelf) {
   let bubbleChat = document.createElement("div");
   bubbleChat.classList.add("bubbleChat");
   
   if (isSelf) {
+    bubbleChat.classList.add("align-self-end");
     bubbleChat.innerHTML = `
     <div class="messageContent chatSelf">${line}
-      <div class="timeSent">${getCurrentTime()}</div>
+    <div class="timeSent">${getCurrentTime()}</div>
     </div>
     <div class="avatar mx-2"></div>
     `;
   } else {
+    bubbleChat.classList.add("align-self-start");
     bubbleChat.innerHTML = `
-      <div class="avatar"></div>
-      <div class="messageContent">${line}
+    <div class="avatar mx-2"></div>
+      <div class="messageContent chatOther">${line}
         <div class="timeSent">${getCurrentTime()}</div>
       </div>
     `;
@@ -102,7 +69,7 @@ function displayMessage(line, isSelf) {
 
 
 button.addEventListener("click", () => {
-  const username = usernameInput.value;
+  const username = user.textContent;
   const messageText = message.value;
 
   fetch(`${baseUrl}/chat-write.php`, {
@@ -120,8 +87,8 @@ button.addEventListener("click", () => {
     })
     .then((data) => {
       console.log(data);
+      readChat();
       message.value = ""; // Clear input after successful message submission
-      displayMessage(messageText, true); // Display the sent message as a bubble chat (self)
     })
     .catch((error) => {
       console.error("Mode fetch mengalami error", error);
@@ -142,3 +109,22 @@ function getCurrentTime() {
   let strTime = hours + ":" + minutes + " " + ampm;
   return strTime;
 }
+
+let buttonChat = document.querySelector("#openChatbot");
+let chat = document.querySelector(".chatbot");
+
+// buttonChat.addEventListener("click", () => {
+//   if(chat.classList.contains("visually-hidden")){
+//     chat.classList.remove("visually-hidden");
+//     window.scrollTo(0, document.documentElement.scrollHeight || document.body.scrollHeight);
+//   }
+//   else{
+//     chat.classList.add("visually-hidden");
+//     window.scrollTo(0,0);
+//   } 
+// })
+
+buttonChat.addEventListener("click", function () {
+  // Toggle kelas untuk menampilkan atau menyembunyikan chatbot
+  chat.classList.toggle("show");
+});
