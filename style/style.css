@@ -2,7 +2,8 @@ body,
 html {
   height: 100%;
   margin: 0;
-  background: #c4e4ff;
+  background: white;
+  font-family: "Poppins", sans-serif;
 }
 
 .card {
@@ -101,8 +102,8 @@ html {
 
 .chatbot-button {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 100px;
+  right: 50px;
 }
 
 .rounded-circle {
